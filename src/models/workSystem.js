@@ -36,4 +36,6 @@ const workSystemSchema = new Schema({
   ],
 });
 
-module.exports = mongoose.model("WorkSystem", workSystemSchema);
+const WorkSystem = mongoose.model("WorkSystem", workSystemSchema);
+
+exports.WorkSystem = WorkSystem 
