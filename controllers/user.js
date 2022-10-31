@@ -1,33 +1,23 @@
 const User = require("../models/user");
 
-exports.postAddUsers = (req, res, next) => {
-  const name = req.body.name;
-  const email = req.body.email;
+exports.postAddUsers = async(req, res, next) => {
+  try {
+    const user = new User(req.body);
+    await user.save();
+    res.status(200).send(user)
 
-  const user = new User({
-    name: name,
-    email: email,
-  });
-  user
-    .save()
-    .then((result) => {
-      console.log("User Created:", result);
-      res.status(200).send(result);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(400).send(err);
-    });
+  } catch (error) {
+    res.status(400).send(error)
+  }
+
 };
 
-exports.getUsers = (req, res, next) => {
-  User.find()
-    .then((users) => {
-      console.log(users);
-      res.status(200).send(users);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(404).send(err);
-    });
+exports.getUsers = async(req, res, next) => {
+  try {
+    const users = await User.find();
+    res.status(200).send(users)
+  } catch (error) {
+    res.status(404).send(error)
+  }
+
 };

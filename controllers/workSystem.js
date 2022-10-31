@@ -19,3 +19,29 @@ exports.getWorkSystem = async (req, res, next) => {
     res.status(404).send(error);
   }
 };
+
+exports.updateWorkSystem = async (req,res,next) => {
+  try {
+    const workSystem =  await WorkSystem.findOne({_id: req.params.worksystemid})
+    Object.keys(req.body).map(key => {
+      workSystem[key] = req.body[key]
+    })
+    await workSystem.save()
+    // const workSystem = await WorkSystem.findByIdAndUpdate(req.params.worksystemid, req.body);
+    // await workSystem.save();
+    res.status(200).send(workSystem)
+  } catch (error) {
+    console.log(error)
+    res.status(404).send(error)
+  }
+}
+
+exports.deleteWorkSystem = async(req,res,next) => {
+  try {
+    const workSystem = await WorkSystem.findById({_id: req.params.worksystemid});
+    await workSystem.delete();
+    res.status(200).send(workSystem)
+  } catch (error) {
+    res.status(404).send(error)
+  }
+}
