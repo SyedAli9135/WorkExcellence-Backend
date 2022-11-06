@@ -1,6 +1,7 @@
 const express = require("express");
 const getRoutes = require("./start/getRoutes");
-
+const dotenv = require("dotenv");
+dotenv.config();
 // Database Connectivity
 require("./start/dbConnect");
 

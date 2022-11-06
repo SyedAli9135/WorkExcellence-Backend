@@ -3,7 +3,7 @@ const User = require("../models/user");
 
 exports.postAddWorkSystem = async (req, res, next) => {
   try {
-    const workSystem = new WorkSystem(req.body);
+    const workSystem = new WorkSystem({ ...req.body, user: req.user.id });
     await workSystem.save();
     res.status(200).send(workSystem);
   } catch (error) {
@@ -36,6 +36,7 @@ exports.updateWorkSystem = async (req, res, next) => {
   try {
     const workSystem = await WorkSystem.findOne({
       _id: req.params.worksystemid,
+      user: req.user.id,
     });
     Object.keys(req.body).map((key) => {
       workSystem[key] = req.body[key];
@@ -54,6 +55,7 @@ exports.deleteWorkSystem = async (req, res, next) => {
   try {
     const workSystem = await WorkSystem.findById({
       _id: req.params.worksystemid,
+      user: req.user.id,
     });
     await workSystem.delete();
     res.status(200).send(workSystem);
