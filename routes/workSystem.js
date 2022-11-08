@@ -1,9 +1,13 @@
 const express = require("express");
 const verifyToken = require("../middlewares/auth");
 const router = express.Router();
-const WorkSystemController = require("../controllers/workSystem");
+const WorkSystemController = require("../controllers/workSystemController");
 router.get("/", WorkSystemController.getWorkSystem);
-router.get("/worksystemuser/:userid", WorkSystemController.getWorkSystemByUser);
+router.get(
+  "/worksystemuser",
+  verifyToken,
+  WorkSystemController.getWorkSystemByUser
+);
 router.post("/add", verifyToken, WorkSystemController.postAddWorkSystem);
 router.post(
   "/update/:worksystemid",

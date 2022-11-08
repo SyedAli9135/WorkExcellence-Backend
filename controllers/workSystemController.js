@@ -23,8 +23,8 @@ exports.getWorkSystem = async (req, res, next) => {
 
 exports.getWorkSystemByUser = async (req, res, next) => {
   try {
-    const workSystem = await WorkSystem.find({
-      user: req.params.userid,
+    const workSystem = await WorkSystem.findOne({
+      user: req.user.id,
     }).populate("user");
     res.status(200).send(workSystem);
   } catch (error) {
