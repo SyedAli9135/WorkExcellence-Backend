@@ -20,8 +20,28 @@ const workSystemSchema = new Schema({
   managementRail: {
     type: String,
   },
-  workType: [{ type: String }],
-  managementSystem: [{ type: String }],
+  workType: [
+    {
+      value: {
+        type: String,
+      },
+
+      color: {
+        type: String,
+      },
+    },
+  ],
+  managementSystem: [
+    {
+      value: {
+        type: String,
+      },
+
+      color: {
+        type: String,
+      },
+    },
+  ],
   phases: [
     {
       purpose: {
@@ -31,7 +51,17 @@ const workSystemSchema = new Schema({
       phase: {
         type: String,
       },
-      stepsOfWork: [{ type: String }],
+      stepsOfWork: [
+        {
+          value: {
+            type: String,
+          },
+
+          color: {
+            type: String,
+          },
+        },
+      ],
     },
   ],
 });
